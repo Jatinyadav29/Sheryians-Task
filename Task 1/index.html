@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="menu-icon"><i class="ri-menu-line"></i></div>
+        <div class="logo">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
+            alt="Pokemon"
+          />
+        </div>
+        <div class="theme-toggle"><i class="ri-sun-line"></i></div>
+      </header>
+
+      <section class="controls">
+        <div class="search-bar">
+          <i class="ri-search-line"></i>
+          <input type="text" placeholder="Search for a Pokémon..." />
+        </div>
+        <div class="filters">
+          <div class="filter-dropdown">
+            Filter by types (1) <i class="ri-arrow-down-s-line"></i>
+          </div>
+          <div class="sort-icon">
+            <i class="ri-equalizer-line"></i>
+          </div>
+        </div>
+      </section>
+
+      <main class="card-grid">
+        <div class="card" style="--bg: #f2fdf5">
+          <span class="pokemon-id">#0908</span>
+          <div class="favorite"><i class="ri-heart-line"></i></div>
+          <div class="pokemon-img">
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/908.png"
+              alt="Meowscarada"
+            />
+          </div>
+          <div class="card-info">
+            <h3>Meowscarada</h3>
+            <div class="type-tag grass"><i class="ri-leaf-line"></i> GRASS</div>
+          </div>
+          <div class="action-btn"><i class="ri-arrow-right-line"></i></div>
+        </div>
+
+        <div class="card" style="--bg: #f3f6fc">
+          <span class="pokemon-id">#0624</span>
+          <div class="favorite"><i class="ri-heart-line"></i></div>
+          <div class="pokemon-img">
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/624.png"
+              alt="Pawniard"
+            />
+          </div>
+          <div class="card-info">
+            <h3>Pawniard</h3>
+            <div class="type-tag dark">
+              <i class="ri-hexagon-line"></i> DARK / STEEL
+            </div>
+          </div>
+          <div class="action-btn"><i class="ri-arrow-right-line"></i></div>
+        </div>
+
+        <div class="card" style="--bg: #fdf5f2">
+          <span class="pokemon-id">#0229</span>
+          <div class="favorite"><i class="ri-heart-line"></i></div>
+          <div class="pokemon-img">
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/229.png"
+              alt="Houndoom"
+            />
+          </div>
+          <div class="card-info">
+            <h3>Houndoom</h3>
+            <div class="type-tag fire">
+              <i class="ri-fire-line"></i> DARK / FIRE
+            </div>
+          </div>
+          <div class="action-btn"><i class="ri-arrow-right-line"></i></div>
+        </div>
+
+        <div class="card" style="--bg: #f2f6fd">
+          <span class="pokemon-id">#0686</span>
+          <div class="favorite"><i class="ri-heart-line"></i></div>
+          <div class="pokemon-img">
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/686.png"
+              alt="Inkay"
+            />
+          </div>
+          <div class="card-info">
+            <h3>Inkay</h3>
+            <div class="type-tag psychic">
+              <i class="ri-drop-line"></i> DARK / PSYCHIC
+            </div>
+          </div>
+          <div class="action-btn"><i class="ri-arrow-right-line"></i></div>
+        </div>
+      </main>
+
+      <footer>
+        <div class="footer-item">
+          <div class="f-icon blue"><i class="ri-copper-coin-line"></i></div>
+          <div>
+            <h4>Explore</h4>
+            <p>Discover all your favorite Pokémon</p>
+          </div>
+        </div>
+        <div class="footer-item">
+          <div class="f-icon green"><i class="ri-leaf-line"></i></div>
+          <div>
+            <h4>Filter</h4>
+            <p>Find Pokémon by types and abilities</p>
+          </div>
+        </div>
+        <div class="footer-item">
+          <div class="f-icon gold"><i class="ri-star-line"></i></div>
+          <div>
+            <h4>Collection</h4>
+            <p>Save and manage your collection</p>
+          </div>
+        </div>
+        <div class="footer-item">
+          <div class="f-icon purple"><i class="ri-bar-chart-line"></i></div>
+          <div>
+            <h4>Stats</h4>
+            <p>View stats and learn about Pokémon</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
