@@ -1,0 +1,351 @@
+:root {
+  --bg-dark: #0a0a0a;
+  --card-bg: #121212;
+  --card-border: #222222;
+  --accent-color: #df7a28;
+  --text-primary: #ffffff;
+  --text-secondary: #888888;
+
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+}
+
+.drinks-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.drink-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 40px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.drink-card.active {
+  border-color: var(--accent-color);
+  box-shadow:
+    0 0 25px rgba(223, 122, 40, 0.15),
+    inset 0 0 20px rgba(223, 122, 40, 0.05);
+}
+
+.badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: var(--accent-color);
+}
+
+.badge-signature svg {
+  width: 12px;
+  height: 12px;
+}
+
+.badge-new .dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+}
+
+.drink-image {
+  width: 100%;
+  height: 220px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.drink-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  min-width: 100px;
+}
+
+.drink-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.drink-desc {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+}
+
+.drink-price {
+  color: var(--accent-color);
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: auto;
+}
+
+.special-section {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.special-image {
+  flex: 0 0 45%;
+  display: flex;
+  justify-content: center;
+}
+
+.special-image img {
+  max-width: 120%;
+  height: auto;
+  object-fit: contain;
+  transform: scale(1.1);
+}
+
+.special-content {
+  flex: 1;
+  padding-left: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.overline {
+  color: var(--accent-color);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.overline::after {
+  content: "";
+  height: 1px;
+  width: 40px;
+  background-color: var(--accent-color);
+  opacity: 0.5;
+}
+
+.special-content h2 {
+  font-family: var(--font-heading);
+  font-size: 2.8rem;
+  font-weight: 500;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.special-subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.special-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  max-width: 90%;
+}
+
+.btn-explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent-color);
+  text-decoration: none;
+  border: 1px solid var(--accent-color);
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.btn-explore:hover {
+  background-color: var(--accent-color);
+  color: var(--bg-dark);
+}
+
+.bg-leaves {
+  position: absolute;
+  right: -5%;
+  bottom: -10%;
+  width: 300px;
+  height: 300px;
+  background-image: radial-gradient(
+    circle,
+    rgba(223, 122, 40, 0.05) 0%,
+    transparent 70%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid var(--card-border);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--accent-color);
+}
+
+.separator {
+  color: var(--card-border);
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--card-border);
+  border-radius: 50%;
+  color: var(--accent-color);
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
+}
+
+.social-links a svg {
+  width: 14px;
+  height: 14px;
+}
+
+.social-links a:hover {
+  border-color: var(--accent-color);
+  background-color: rgba(223, 122, 40, 0.1);
+}
+
+@media (max-width: 992px) {
+  .drinks-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .special-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .special-content {
+    padding-left: 0;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .overline::after {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .drinks-grid {
+    grid-template-columns: 1fr;
+  }
+}
