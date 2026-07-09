@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Explorer | Pure JS</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="canvas-bg">
+      <div class="app-shell">
+        <div class="top-bar">
+          <div class="brand">DOM Explorer</div>
+          <button id="theme-toggle" class="btn-icon rounded-pill">☾</button>
+        </div>
+
+        <main class="content-wrapper">
+          <header class="hero text-center">
+            <span class="badge-new">Made for Fun & Explore</span>
+            <h1 class="hero-title">
+              Ek DOM engine jo pura
+              <span class="pill-highlight">Scene Set</span> karta hai 💯
+            </h1>
+            <p class="hero-subtitle">
+              Bade projects mangte hai solid foundation, pure vanilla JS magic
+              se leke precise event delegation tak.
+            </p>
+          </header>
+
+          <section class="module-block text-center">
+            <div class="module-header">
+              <img
+                src="https://i.pinimg.com/736x/f9/9f/cb/f99fcbfd99c88bbae09e2d110de6cf18.jpg"
+                alt="Ada"
+                class="mini-avatar"
+              />
+
+              <h2>Task Ka Scene 🎬</h2>
+              <p class="subtext">
+                "Sab kuch pure DOM APIs se bana hai bhai (createElement &
+                append). No cap."
+              </p>
+            </div>
+
+            <div class="sandbox-container">
+              <div class="board">
+                <div class="add-row">
+                  <input
+                    type="text"
+                    id="new-task-input"
+                    placeholder="Kya vibe hai aaj ki?"
+                  />
+                  <button
+                    type="button"
+                    id="add-btn"
+                    class="btn-primary rounded-pill"
+                  >
+                    Drop Task
+                  </button>
+                </div>
+                <ul id="task-list"></ul>
+              </div>
+
+              <div class="proof-panel text-left">
+                <p class="proof-title">Delegation Ka Saboot 👀</p>
+                <div class="proof-row">
+                  <span class="k text-mute"
+                    >Listeners attached to #task-list (Bahar wale pe)</span
+                  ><span class="v">2 (click, keydown)</span>
+                </div>
+                <div class="proof-row">
+                  <span class="k text-mute"
+                    >Buttons in DOM (Andar kitne hai)</span
+                  ><span class="v" id="btn-count">0</span>
+                </div>
+                <div id="task-log">
+                  <div class="empty">Tera saara action log yahan dikhega.</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="module-block text-center border-top">
+            <div class="module-header">
+              <span class="badge-subtle">Flow Check</span>
+              <h2>Event Propagation (Kiske paas event gaya?)</h2>
+              <p class="subtext">
+                Neeche button daba aur dekh click kaise family tree mein travel
+                karta hai.
+              </p>
+            </div>
+
+            <div class="sandbox-container layout-split">
+              <div class="stage text-left">
+                <div class="phase-indicator" id="phase-indicator">
+                  <span class="dot"></span
+                  ><span id="phase-text">Button daba flow dekhne ke liye</span>
+                </div>
+                <div class="rings">
+                  <div class="ring" id="grandparent">
+                    <span class="ring-label">Dada Ji (Grandparent)</span>
+                    <div class="ring" id="parent">
+                      <span class="ring-label">Papa (Parent)</span>
+                      <div id="child">
+                        <button
+                          id="target-btn"
+                          class="btn-primary rounded-pill"
+                        >
+                          Daba Mujhe
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="controls mt-md">
+                  <label
+                    ><input type="checkbox" id="toggle-capture" checked />
+                    Capturing (Upar se neeche)</label
+                  >
+                  <label
+                    ><input type="checkbox" id="toggle-bubble" checked />
+                    Bubbling (Neeche se upar)</label
+                  >
+                  <label class="mt-sm"
+                    >Bhai event rok de yahan (Stop at):
+                    <select id="stop-at" class="minimal-select">
+                      <option value="none">Chalne de</option>
+                      <option value="gp-capture">Grandparent (Capture)</option>
+                      <option value="p-capture">Parent (Capture)</option>
+                      <option value="target">Target (Button)</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+
+              <div class="log-panel text-left">
+                <div class="flex-between mb-sm">
+                  <p class="log-title mb-0">The Tea ☕ (Execution Order)</p>
+                  <button id="clear-log" class="btn-text small">
+                    Saaf Kar
+                  </button>
+                </div>
+                <div id="prop-log">
+                  <div class="empty">
+                    Abhi tak kuch nahi hua bhai. Button toh daba.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="module-block border-top text-center">
+            <div class="module-header">
+              <span class="badge-subtle">Memory Game</span>
+              <h2>Attr vs Prop (The Ultimate Showdown)</h2>
+              <p class="subtext">
+                Memory state vs. Hardcoded HTML. Neeche type kar aur dekh live
+                kaise badalta hai.
+              </p>
+            </div>
+
+            <div class="sandbox-container text-left">
+              <form id="d3-form" onsubmit="return false;" class="mb-md">
+                <div class="element-box">
+                  <input
+                    type="text"
+                    id="d3-input"
+                    value="default"
+                    class="massive-input text-center"
+                  />
+                </div>
+              </form>
+
+              <div class="readout-grid">
+                <div class="data-card">
+                  <span class="k text-mute">Mood (Mode)</span>
+                  <span class="pill" id="d3-mode-pill">following</span>
+                </div>
+                <div class="data-card">
+                  <span class="k text-mute">getAttribute('value')</span>
+                  <span class="v" id="d3-attr">"default"</span>
+                </div>
+                <div class="data-card">
+                  <span class="k text-mute">input.defaultValue</span>
+                  <span class="v" id="d3-defaultvalue">"default"</span>
+                </div>
+                <div class="data-card">
+                  <span class="k text-mute">input.value (Live)</span>
+                  <span class="v text-main" id="d3-value">"default"</span>
+                </div>
+              </div>
+
+              <div class="action-row mt-md flex-center flex-wrap gap-sm">
+                <button class="btn-outline rounded-pill" onclick="d3setAttr()">
+                  setAttribute('value')
+                </button>
+                <button
+                  class="btn-outline rounded-pill"
+                  onclick="d3setDefaultValue()"
+                >
+                  input.defaultValue
+                </button>
+                <button class="btn-outline rounded-pill" onclick="d3setValue()">
+                  input.value = 'hello!'
+                </button>
+                <button class="btn-text" onclick="d3reset()">
+                  form.reset()
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section class="module-block border-top text-center pb-xl">
+            <div class="module-header">
+              <span class="badge-subtle">Peeche Ka Scene</span>
+              <h2>Browser Rendering Pipeline ⚙️</h2>
+              <p class="subtext">
+                Raw code se screen pixels tak ka safar. The ultimate
+                behind-the-scenes.
+              </p>
+            </div>
+
+            <div class="sandbox-container">
+              <div class="stepper-bar flex-center gap-sm mb-md">
+                <button
+                  id="prev-btn"
+                  class="btn-outline small rounded-pill"
+                  disabled
+                >
+                  Peeche
+                </button>
+                <span class="step-label" id="step-label"
+                  >Step 1 — HTML se DOM tree</span
+                >
+                <button id="next-btn" class="btn-primary small rounded-pill">
+                  Aage
+                </button>
+              </div>
+
+              <div class="stage-grid layout-split text-left mt-lg">
+                <div class="col">
+                  <div class="col-title">Tera HTML</div>
+                  <div class="code-box" id="html-src">
+                    &lt;body&gt; &lt;div class="title"&gt;Hello&lt;/div&gt;
+                    &lt;span class="hidden"&gt;Mujhe chhod de&lt;/span&gt;
+                    &lt;/body&gt;
+                  </div>
+                  <div class="col-title mt-md">DOM Ka Ped (Tree)</div>
+                  <div class="tree" id="dom-tree">
+                    <ul>
+                      <li>
+                        <span class="node dom-n" data-n="body">body</span>
+                        <ul>
+                          <li>
+                            <span class="node dom-n" data-n="div"
+                              >div.title</span
+                            >
+                          </li>
+                          <li>
+                            <span class="node dom-n" data-n="span"
+                              >span.hidden</span
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="col-title">Render Tree</div>
+                  <div class="tree" id="render-tree">
+                    <ul>
+                      <li>
+                        <span class="node render-n" data-n="body">body</span>
+                        <ul>
+                          <li>
+                            <span class="node render-n" data-n="div"
+                              >div.title
+                              <span class="prop">color: teal</span></span
+                            >
+                          </li>
+                          <li>
+                            <span class="node excluded-n" data-n="span"
+                              >span.hidden
+                              <span class="excluded-tag"
+                                >hata diya (excluded)</span
+                              ></span
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="col-title mt-md">Aisa Dikhega (Result)</div>
+                  <div class="browser-frame">
+                    <div class="browser-chrome">
+                      <span></span><span></span><span></span>
+                    </div>
+                    <div class="viewport">
+                      <div class="prev-box" id="prev-div">
+                        Hello
+                        <div class="layout-dims" id="dim-div"></div>
+                      </div>
+                      <div class="prev-box excluded" id="prev-span">
+                        Mujhe chhod de
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
