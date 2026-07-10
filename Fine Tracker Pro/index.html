@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinTrack Pro — Personal Finance Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <div class="modal-overlay" id="form-modal">
+      <div id="login" class="auth-view active">
+        <div class="auth-card">
+          <div class="auth-card__brand">
+            <div class="navbar__brand-mark">F</div>
+            <span>FinTrack Pro</span>
+          </div>
+          <h3>Welcome back</h3>
+          <p class="auth-card__subtitle">Log in to see your transactions.</p>
+
+          <form id="login-form">
+            <div class="field">
+              <label for="login-userid">User ID</label>
+              <input
+                type="text"
+                id="login-userid"
+                placeholder="Your user ID"
+                autocomplete="username"
+              />
+            </div>
+            <div class="field">
+              <label for="login-password">Password</label>
+              <input
+                type="password"
+                id="login-password"
+                placeholder="Your password"
+                autocomplete="current-password"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Log In</button>
+          </form>
+
+          <p class="auth-toggle-line">
+            Don't have an account?
+            <a onclick="showPage('register')">Register</a>
+          </p>
+        </div>
+      </div>
+
+      <div id="register" class="auth-view">
+        <div class="auth-card">
+          <div class="auth-card__brand">
+            <div class="navbar__brand-mark">F</div>
+            <span>FinTrack Pro</span>
+          </div>
+          <h3>Create your account</h3>
+          <p class="auth-card__subtitle">
+            User ID needs 5+ characters, password needs 8+.
+          </p>
+
+          <form id="register-form">
+            <div class="field">
+              <label for="register-userid">User ID</label>
+              <input
+                type="text"
+                id="register-userid"
+                placeholder="Choose a user ID"
+                autocomplete="username"
+              />
+            </div>
+            <div class="field">
+              <label for="register-password">Password</label>
+              <input
+                type="password"
+                id="register-password"
+                placeholder="Choose a password"
+                autocomplete="new-password"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+          </form>
+
+          <p class="auth-toggle-line">
+            Already have an account? <a onclick="showPage('login')">Log In</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="main" class="auth-view">
+      <nav class="navbar">
+        <div class="navbar__brand">
+          <div class="navbar__brand-mark">F</div>
+          <span>FinTrack Pro</span>
+        </div>
+
+        <div class="navbar__links">
+          <button
+            class="navbar__link active"
+            id="nav-dashboard"
+            onclick="showPage('dashboard')"
+          >
+            Dashboard
+          </button>
+          <button
+            class="navbar__link"
+            id="nav-settings"
+            onclick="showPage('settings')"
+          >
+            Settings
+          </button>
+        </div>
+
+        <div class="navbar__actions">
+          <button class="btn btn-primary" id="add-transaction-btn">
+            + Add Transaction
+          </button>
+          <div class="profile-avatar" id="profile-name" title="Logged in"></div>
+          <button class="btn btn-ghost" id="logout-btn">Logout</button>
+        </div>
+      </nav>
+
+      <div class="page-wrap">
+        <section id="dashboard" class="page active">
+          <div class="page__header">
+            <h2>Dashboard</h2>
+            <p>Your cash flow at a glance.</p>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat-card stat-card--balance">
+              <div class="stat-card__top">
+                <span class="stat-card__label">Current Balance</span>
+                <div class="stat-card__icon">₹</div>
+              </div>
+              <div class="stat-card__value" id="stat-balance">₹0.00</div>
+            </div>
+
+            <div class="stat-card stat-card--income">
+              <div class="stat-card__top">
+                <span class="stat-card__label">Total Income</span>
+                <div class="stat-card__icon">↑</div>
+              </div>
+              <div class="stat-card__value" id="stat-income">₹0.00</div>
+            </div>
+
+            <div class="stat-card stat-card--expense">
+              <div class="stat-card__top">
+                <span class="stat-card__label">Total Expense</span>
+                <div class="stat-card__icon">↓</div>
+              </div>
+              <div class="stat-card__value" id="stat-expense">₹0.00</div>
+            </div>
+
+            <div class="stat-card stat-card--count">
+              <div class="stat-card__top">
+                <span class="stat-card__label">Total Transactions</span>
+                <div class="stat-card__icon">#</div>
+              </div>
+              <div class="stat-card__value" id="stat-count">0</div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-card__header">
+              <h3>Cash Flow</h3>
+              <div class="chart-card__legend">
+                <span
+                  ><span class="legend-dot legend-dot--income"></span
+                  >Income</span
+                >
+                <span
+                  ><span class="legend-dot legend-dot--expense"></span
+                  >Expense</span
+                >
+              </div>
+            </div>
+            <div class="chart-card__canvas-wrap">
+              <canvas id="cashFlowChart"></canvas>
+            </div>
+          </div>
+
+          <div class="filter-row">
+            <button
+              class="filter-btn active"
+              id="filter-all"
+              onclick="setFilter('all')"
+            >
+              All
+            </button>
+            <button
+              class="filter-btn"
+              id="filter-income"
+              onclick="setFilter('income')"
+            >
+              Income Only
+            </button>
+            <button
+              class="filter-btn"
+              id="filter-expense"
+              onclick="setFilter('expense')"
+            >
+              Expense Only
+            </button>
+          </div>
+
+          <div class="table-card">
+            <div class="table-scroll">
+              <table class="txn-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="transaction-table-body">
+                  <tr>
+                    <td colspan="5" class="table-empty">
+                      No transactions yet — click "+ Add Transaction" to get
+                      started.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="settings" class="page">
+          <div class="page__header">
+            <h2>Settings</h2>
+            <p>Manage your profile, currency, and appearance.</p>
+          </div>
+
+          <div class="settings-grid">
+            <div class="settings-card">
+              <div class="settings-card__header">
+                <h3>Profile</h3>
+                <p>Your display name and preferred currency.</p>
+              </div>
+              <div class="settings-card__body">
+                <div class="field">
+                  <label for="settings-name">Display Name</label>
+                  <input
+                    type="text"
+                    id="settings-name"
+                    placeholder="e.g. Jatin Sharma"
+                  />
+                </div>
+                <div class="field">
+                  <label for="settings-currency">Preferred Currency</label>
+                  <select id="settings-currency">
+                    <option value="USD">USD — US Dollar</option>
+                    <option value="EUR">EUR — Euro</option>
+                    <option value="GBP">GBP — British Pound</option>
+                    <option value="INR" selected>INR — Indian Rupee</option>
+                    <option value="JPY">JPY — Japanese Yen</option>
+                  </select>
+                </div>
+                <button
+                  class="btn btn-primary"
+                  id="save-profile-btn"
+                  style="align-self: flex-start"
+                >
+                  Save Profile
+                </button>
+                <span class="settings-save-note" id="profile-save-note"></span>
+              </div>
+            </div>
+
+            <div class="settings-card">
+              <div class="settings-card__header">
+                <h3>Appearance</h3>
+                <p>Switch between light and dark theme.</p>
+              </div>
+              <div class="settings-card__body">
+                <div class="toggle-row">
+                  <div class="toggle-row__label">
+                    <strong>Dark Mode</strong>
+                    <span
+                      >Applies instantly and remembers your preference.</span
+                    >
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="dark-mode-toggle" />
+                    <span class="switch__track"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-card settings-card--danger">
+              <div class="settings-card__header">
+                <h3>Danger Zone</h3>
+                <p>Permanently erase all saved transactions and preferences.</p>
+              </div>
+              <div class="settings-card__body">
+                <button
+                  class="btn btn-danger"
+                  id="reset-data-btn"
+                  style="align-self: flex-start"
+                >
+                  Reset All Data
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="modal-overlay" id="modal-overlay">
+      <div class="modal" id="modal">
+        <div class="modal__header">
+          <h3>Add Transaction</h3>
+          <button class="modal__close" id="modal-close-btn">&times;</button>
+        </div>
+
+        <form id="transaction-form">
+          <div class="modal__body">
+            <div class="field">
+              <label>Type</label>
+              <div class="type-toggle">
+                <button
+                  type="button"
+                  class="active"
+                  data-type="income"
+                  onclick="setTxnType('income')"
+                >
+                  Income
+                </button>
+                <button
+                  type="button"
+                  data-type="expense"
+                  onclick="setTxnType('expense')"
+                >
+                  Expense
+                </button>
+              </div>
+              <input type="hidden" id="txn-type" name="type" value="income" />
+            </div>
+
+            <div class="field">
+              <label for="txn-description">Description</label>
+              <input
+                type="text"
+                id="txn-description"
+                name="description"
+                placeholder="e.g. Freelance payment"
+              />
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="txn-amount">Amount</label>
+                <input
+                  type="number"
+                  id="txn-amount"
+                  name="amount"
+                  placeholder="0.00"
+                  min="0"
+                  step="0.01"
+                />
+              </div>
+              <div class="field">
+                <label for="txn-date">Date</label>
+                <input type="date" id="txn-date" name="date" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="txn-category">Category</label>
+              <select id="txn-category" name="category">
+                <option value="Food & Dining">Food & Dining</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Recharge & Bills">Recharge & Bills</option>
+                <option value="Petrol & Auto">Petrol & Auto</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Salary">Salary</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal__footer">
+            <button type="submit" class="btn btn-primary">
+              Save Transaction
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
